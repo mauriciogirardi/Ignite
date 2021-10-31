@@ -19,13 +19,13 @@ interface PostPreviewProps {
 
 export default function PostPreview({ post }: PostPreviewProps) {
   const [session] = useSession()
-  const { push } = useRouter()
+  const router = useRouter()
 
   useEffect(() => {
-    if (!session?.activeSubscription) {
-      push(`/posts/${post.slug}`)
+    if (session?.activeSubscription) {
+      router.push(`/posts/${post.slug}`)
     }
-  }, [push, post, session?.activeSubscription])
+  }, [router, post, session?.activeSubscription])
 
   return (
     <>
